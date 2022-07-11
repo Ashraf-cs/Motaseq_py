@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<htm>
+    <head>
+        <title>Motaseq</title>
+        <meta name="description" content="Style your web pages easly" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/static/favicon.png" />
+        <link rel="stylesheet" href="/static/styles/bootstrap.css" />
+    </head>
+
+    <body>
+        <div class="container mx-0 px-0" id="div">
+          <div class="row g-0" style="width: 100vw; height: 100vh">
+            <div class="col-9">
+                <div class="bg-dark" style="Height: 38px">
+                  <div class="row d-flex justify-content-between">
+                    <div class="col py-1 ps-3" >
+                      <div class="text-secondary text-warning"><b class="badge bg-secondary text-dark" style="font-size: 12.3px">Server:</b> <code id="server" style="color: #00cc99; font-size: 14.5px"></code></div>
+                    </div>
+                    <div class="col-auto pe-2">
+                      <div class="row g-0 pe-1">
+                        <div class="col-auto mt-1 me-1 pb-1" style="max-width: 130px">
+                          <div class="input-group input-group-sm ms-0">
+                            <span class="input-group-text bg-dark text-secondary fw-bold" style="width: 40px">Tag</span>
+                            <input type="text" id="tag" name="tag" class="form-control bg-dark fw-bold" defaultValue="none" readOnly style="color: #00cc99"/>                      
+                          </div>
+                        </div>
+                        <div class="col-auto mt-1 pb-1" style="max-width: 140px">
+                          <div class="input-group input-group-sm ms-0">
+                            <span class="input-group-text bg-dark text-secondary fw-bold"  style="width: 35px" >ID</span>
+                            <input type="text" id="id" name="id" class="form-control bg-dark fw-bold" defaultValue="none" readOnly style="color: #00cc99"/>
+                          </div>
+                        </div>
+                        <div class="col-auto m-1 pb-1 pe-0 d-none" style="max-width: 160px">
+                            <button class="badge rounded-1 text-dark mb-2 border-0 h-100" data-bs-toggle="collapse" data-bs-target="#class" style="background-color: #00cc99">As class</button>
+                        </div>
+                      </div>
+                    </div>
+    
+                  </div>
+                </div>
+                <iframe id="iframe" class="w-100 h-100"></iframe>
+            </div>
+            <iframe name="refreshFrame" src="" hidden></iframe>
+            <div class="col-3">
+                <div class="bg-dark px-3 pt-1 overflow-auto" style="width: auto; height: 100vh">
+                    <div class="container">
+                      <div class="mb-2" id="class">
+                        <form method="post" action="/createClass" target="refreshFrame" onsubmit="setTimeout(()=>{getClasses()}, 300)">
+                          <div class="row g-1">
+                            <div class="col-10">
+                              <input name="cssPath" class="cssPath" hidden/>
+                              <input name="cssFile" class="cssFile" hidden/>
+                              <input name="id" class="id" hidden/>
+                              <div class="input-group input-group-sm ms-0">
+                                <span class="input-group-text bg-secondary text-dark fw-bold " style="width: 90px">set as class</span>
+                                <input type="text" name="class" class="form-control bg-dark text-secondary" />                      
+                              </div>
+                            </div>
+                            <div class="col">
+                              <button type="submit" class="btn btn-sm btn-secondary w-100">Set</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <div id="classes" class="container border border-secondary rounded px-1 py-1 overflow-auto" style="min-height: 55px">
+                          <!-- Classes list will be inserted here after they fetch from the server using getClasses function -->
+                        </div>
+                      </div>
+                    </div>
+                    <div id="props" class="row g-1 row-cols-lg-3 row-cols-sm-auto d-felx justify-content-center mt-1">
+                    <div class="col" >
+                      <div class="">
+                        <!-- margin -->
+                        <button class="btn btn-sm btn-dark border-secondary" data-bs-toggle="collapse" 
+                          data-bs-target="#margins" style="width: 96px; height: 30px; font-size: 13.5px">Margin </button>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="">
+                        <!-- padding -->
+                        <button class="btn btn-sm btn-dark border-secondary" data-bs-toggle="collapse" 
+                          data-bs-target="#paddings" style="width: 96px; height: 30px; font-size: 13.5px">Padding </button>
+                      </div>
+                    </div>
+                    <!-- font -->
+                    <div class="col">
+                      <div class="">
+                          <button class="btn btn-sm btn-dark border-secondary" data-bs-toggle="collapse" 
+                            data-bs-target="#font" style="width: 96px; height: 30px; font-size: 13.5px">Font </button>
+                      </div>
+                    </div>
+                    <!-- Width -->
+                    <div class="col">
+                      <div class="">
+                          <button class="btn btn-sm btn-dark border-secondary p-0" data-bs-toggle="collapse" 
+                            data-bs-target="#WIDTH" style="width: 96px; height: 30px; font-size: 13.5px">Width</button>
+                        </div>
+                    </div>
+                    <!-- Height -->
+                    <div class="col">
+                      <div class="">
+                          <button class="btn btn-sm btn-dark border-secondary p-0" data-bs-toggle="collapse" 
+                            data-bs-target="#HIGHT" style="width: 96px; height: 30px; font-size: 13.5px">Height</button>
+                        </div>
+                    </div>
+                    <!-- Background -->
+                    <div class="col">
+                      <div class="">
+                          <button class="btn btn-sm btn-dark border-secondary p-0" data-bs-toggle="collapse" 
+                            data-bs-target="#background" style="width: 96px; height: 30px; font-size: 13.5px">Background </button>
+                      </div>
+                    </div>
+                    <!-- Borders -->
+                    <div class="col">
+                      <div class="">
+                          <button class="btn btn-sm btn-dark border-secondary" data-bs-toggle="collapse" 
+                            data-bs-target="#borders" style="width: 96px; height: 30px; font-size: 13.5px">Borders </button>
+                        </div>
+                    </div>
+                    <!-- Outline -->
+                    <div class="col">
+                      <div class="">
+                        <button class="btn btn-sm btn-dark border-secondary" data-bs-toggle="collapse" 
+                          data-bs-target="#outline" style="width: 96px; height: 30px; font-size: 13.5px">Outline </button>
+                      </div>
+                    </div>
+                    <!-- Text -->
+                    <div class="col">
+                      <div class="">
+                        <button class="btn btn-sm btn-dark border-secondary" data-bs-toggle="collapse" 
+                          data-bs-target="#text" style="width: 96px; height: 30px; font-size: 13.5px">Text </button>
+                      </div>
+                    </div>
+                    <!-- Display -->
+                    <div class="col">
+                      <div class="">
+                        <button class="btn btn-sm btn-dark border-secondary" data-bs-toggle="collapse" 
+                          data-bs-target="#display" style="width: 96px; height: 30px; font-size: 13.5px">Display </button>
+                      </div>
+                    </div>
+                    <!-- Position -->
+                    <div class="col">
+                      <div class="">
+                        <button class="btn btn-sm btn-dark border-secondary" data-bs-toggle="collapse" 
+                          data-bs-target="#position" style="width: 96px; height: 30px; font-size: 13.5px">Position </button>
+                      </div>
+                    </div>
+                    <!-- z-index -->
+                    <div class="col">
+                      <div class="">
+                        <button class="btn btn-sm btn-dark border-secondary" data-bs-toggle="collapse" 
+                          data-bs-target="#z-index" style="width: 96px; height: 30px; font-size: 13.5px">Z-index </button>
+                      </div>
+                    </div>
+                    <!-- Overflow -->
+                    <div class="col">
+                      <div class="">
+                        <button class="btn btn-sm btn-dark border-secondary" data-bs-toggle="collapse" 
+                          data-bs-target="#overflow" style="width: 96px; height: 30px; font-size: 13.5px">Overflow </button>
+                      </div>
+                    </div>
+                    <!-- Float -->
+                    <div class="col">
+                      <div class="">
+                        <button class="btn btn-sm btn-dark border-secondary" data-bs-toggle="collapse" 
+                          data-bs-target="#float" style="width: 96px; height: 30px; font-size: 13.5px">Float </button>
+                      </div>
+                    </div>
+                    <!-- Opacity -->
+                    <div class="col">
+                      <div class="">
+                        <button class="btn btn-sm btn-dark border-secondary" data-bs-toggle="collapse" 
+                          data-bs-target="#opacity" style="width: 96px; height: 30px; font-size: 13.5px">Opacity </button>
+                      </div>
+                    </div>
+                  </div>
+                    <div id="views" class="accordion mt-3 py-2 border-top border-secondary" style="border-color: #00cc99">
+                        <!-- Margin -->
+                        <div class="accordion-collapse collapse" id="margins" data-bs-parent="#views">
+                            <div class="py-2">
+                              <div class="row my-2 d-flex justify-content-center">
+                                <input type="radio" name="margin-all" id="margin-all" class="btn-check" defaultChecked/>
+                                <label for="margin-all" class="btn btn-sm btn-outline-secondary py-0 px-1" style="font-size: 13px; width: 90px">All</label>
+                              </div>
+                              <form name="margin-all-form" action="/set" target="refreshFrame" method="post">
+                                <fieldset id="margin-all-field">
+                                  <input name="catg" value="margin-all" hidden/>
+                                  <input name="cssPath" class="cssPath" hidden/>
+                                  <input name="cssFile" class="cssFile" hidden/>
+                                  <input name="id" class="id" hidden/>
+                                  <input name="tagName" class="TagName" hidden/>
+                                  <div class="row mb-3 g-1" id="margins-row">
+                                    <div class="col">
+                                      <div class="input-group input-group-sm ms-0">
+                                        <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 64px">Margins</span>
+                                        <input type="number" name="margin" id="margin" class="form-control bg-dark text-secondary border-secondary" 
+                                          min="0" defaultValue="0" 
+                                          onchange='
+                                            toTargetFrame(document.getElementById("id").value,"margin",
+                                            event.target.value + document.getElementById("margins-unit").value); event.target.form.submit()'/>
+                                      </div>
+                                    </div>
+                                    <div class="col">
+                                      <div class="input-group input-group-sm ms-0">
+                                        <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 40px">Unit</span>
+                                        <select name="margins-unit" id="margins-unit" class="form-select bg-dark text-secondary border-secondary"
+                                          onchange='
+                                            toTargetFrame(document.getElementById("id").value,"margin",
+                                            document.getElementById("margin").value + event.target.value); event.target.form.submit()'>
+                                          <option value="px">px</option>
+                                          <option value="em">em</option>
+                                          <option value="rem">rem</option>
+                                          <option value="%">%</option>
+                                          <option value="vh">vw</option>
+                                          <option value="auto">auto</option>
+                                          <option value="initial">initial</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </fieldset>
+                              </form>
+                              <div class="row mb-2 d-flex justify-content-center">
+                                <input type="radio" name="margin-c" id="margin-c" class="btn-check"/>
+                                <label for="margin-c" class="btn btn-sm btn-outline-secondary  py-0 px-1" style="font-size: 13px; width: 90px">Custom</label>
+                              </div>
+                              <form name="margin-c-form" id="margin-c-form" action="/set" target="refreshFrame" method="post">
+                                <fieldset id="margin-c-field">
+                                  <input name="catg" value="margin-c" hidden/>
+                                  <input name="cssPath" class="cssPath" hidden/>
+                                  <input name="cssFile" class="cssFile" hidden/>
+                                  <input name="id" class="id" hidden/>
+                                  <input name="tagName" class="TagName" hidden/>
+                                  <div class="row mb-2">
+                                    <div class="input-group input-group-sm  ms-0">
+                                        <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 60px">Unit</span>
+                                        <select name="margin-unit" id="margin-unit" class="form-select bg-dark text-secondary border-secondary" 
+                                          onchange='
+                                            toTargetFrame(document.getElementById("id").value,"margin",
+                                            `${document.getElementById("margin-top").value}${event.target.value} ` +
+                                            `${document.getElementById("margin-right").value}${event.target.value} ` +
+                                            `${document.getElementById("margin-bottom").value}${event.target.value} ` +
+                                            `${document.getElementById("margin-left").value}${event.target.value}`
+                                            ); event.target.form.submit()'>
+                                          <option value="px">px</option>
+                                          <option value="em">em</option>
+                                          <option value="rem">rem</option>
+                                          <option value="vh">vw</option>
+                                          <option value="vh">vh</option>
+                                          <option value="%">%</option>
+                                        </select>
+                                      </div>
+                                  </div>
+                                  <div class="row mb-2">
+                                      <div class="col">
+                                        <div class="input-group input-group-sm ms-0">
+                                          <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 60px">Right</span>
+                                          <input type="number" name="margin-right" id="margin-right" class="form-control bg-dark text-secondary border-secondary"
+                                            defaultValue="0" min="0" onchange='
+                                            toTargetFrame(document.getElementById("id").value,"margin-right",
+                                            event.target.value + document.getElementById("margin-unit").value); event.target.form.submit()'/>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <div class="row mb-2">
+                                      <div class="col">
+                                        <div class="input-group input-group-sm ms-0">
+                                          <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 60px">Left</span>
+                                          <input type="number" name="margin-left" id="margin-left" class="form-control bg-dark text-secondary border-secondary"
+                                            defaultValue="0" min="0" onchange='
+                                            toTargetFrame(document.getElementById("id").value,"margin-left",
+                                            event.target.value + document.getElementById("margin-unit").value); event.target.form.submit()'/>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <div class="row mb-2">
+                                      <div class="col">
+                                        <div class="input-group input-group-sm ms-0">
+                                          <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 60px">Top</span>
+                                          <input type="number" name="margin-top" id="margin-top" class="form-control bg-dark text-secondary border-secondary" 
+                                            defaultValue="0" min="0" onchange='
+                                            toTargetFrame(document.getElementById("id").value,"margin-top",
+                                            event.target.value + document.getElementById("margin-unit").value); event.target.form.submit()'/>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col">
+                                        <div class="input-group input-group-sm ms-0">
+                                          <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 60px">Bottom</span>
+                                          <input type="number" name="margin-bottom" id="margin-bottom" class="form-control bg-dark text-secondary border-secondary"
+                                            defaultValue="0" min="0" onchange='
+                                            toTargetFrame(document.getElementById("id").value,"margin-bottom",
+                                            event.target.value + document.getElementById("margin-unit").value); event.target.form.submit()'/>
+                                        </div>
+                                      </div>
+                                  </div>
+                                </fieldset>
+                              </form>
+                            </div>
+                        </div>
+                        <!-- { Padding } -->
+                        <div class="accordion-collapse collapse" id="paddings" data-bs-parent="#views">
+                            <div class="py-2">
+                              <div class="row my-2 d-flex justify-content-center">
+                                <input type="radio" name="padding-all" id="padding-all" class="btn-check" defaultChecked/>
+                                <label for="padding-all" class="btn btn-sm btn-outline-secondary py-0 px-1" style="font-size: 13px; width: 90px">All</label>
+                              </div>
+                              <form name="padding-all-form" action="/set" target="refreshFrame" method="post">
+                                <fieldset id="padding-all-field">
+                                  <input name="catg" value="padding-all" hidden/>
+                                  <input name="cssPath" class="cssPath" hidden/>
+                                  <input name="cssFile" class="cssFile" hidden/>
+                                  <input name="id" class="id" hidden/>
+                                  <input name="tagName" class="TagName" hidden/>
+                                  <div class="row mb-3 g-1" id="paddings-row">
+                                    <div class="col">
+                                      <div class="input-group input-group-sm ms-0">
+                                        <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 64px">Padding</span>
+                                        <input type="number" name="padding" id="padding" class="form-control bg-dark text-secondary border-secondary" 
+                                          min="1" defaultValue="0" onchange='
+                                            toTargetFrame(document.getElementById("id").value,"padding",
+                                            event.target.value + document.getElementById("paddings-unit").value); event.target.form.submit()'/>
+                                      </div>
+                                    </div>
+                                    <div class="col">
+                                      <div class="input-group input-group-sm ms-0">
+                                        <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 40px">Unit</span>
+                                        <select name="paddings-unit" id="paddings-unit" class="form-select bg-dark text-secondary border-secondary"
+                                          onchange='
+                                            toTargetFrame(document.getElementById("id").value,"padding",
+                                            document.getElementById("padding").value + event.target.value); event.target.form.submit()'>
+                                          <option value="px">px</option>
+                                          <option value="em">em</option>
+                                          <option value="rem">rem</option>
+                                          <option value="%">%</option>
+                                          <option value="vh">vw</option>
+                                          <option value="auto">auto</option>
+                                          <option value="initial">initial</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </fieldset>
+                              </form>
+                              <div class="row mb-2 d-flex justify-content-center">
+                                <input type="radio" name="padding-c" id="padding-c" class="btn-check"/>
+                                <label for="padding-c" class="btn btn-sm btn-outline-secondary  py-0 px-1" style="font-size: 13px; width: 90px">Custom</label>
+                              </div>
+                              <form name="padding-c-form" id="padding-c-form" action="/set" target="refreshFrame" method="post">
+                                <fieldset id="padding-c-field">
+                                  <input name="catg" value="padding-c" hidden/>
+                                  <input name="cssPath" class="cssPath" hidden/>
+                                  <input name="cssFile" class="cssFile" hidden/>
+                                  <input name="id" class="id" hidden/>
+                                  <input name="tagName" class="TagName" hidden/>
+                                  <div class="row mb-2">
+                                    <div class="input-group input-group-sm  ms-0">
+                                        <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 60px">Unit</span>
+                                        <select name="padding-unit" id="padding-unit" class="form-select bg-dark text-secondary border-secondary" 
+                                          onchange='
+                                            toTargetFrame(document.getElementById("id").value,"padding",
+                                            `${document.getElementById("padding-top").value}${event.target.value} ` +
+                                            `${document.getElementById("padding-right").value}${event.target.value} ` +
+                                            `${document.getElementById("padding-bottom").value}${event.target.value} ` +
+                                            `${document.getElementById("padding-left").value}${event.target.value}`
+                                            ); event.target.form.submit()'>
+                                          <option value="px">px</option>
+                                          <option value="em">em</option>
+                                          <option value="rem">rem</option>
+                                          <option value="vh">vw</option>
+                                          <option value="vh">vh</option>
+                                          <option value="%">%</option>
+                                        </select>
+                                      </div>
+                                  </div>
+                                  <div class="row mb-2">
+                                      <div class="col">
+                                        <div class="input-group input-group-sm ms-0">
+                                          <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 60px">Right</span>
+                                          <input type="number" name="padding-right" id="padding-right" class="form-control bg-dark text-secondary border-secondary"
+                                            defaultValue="0" min="0" onchange='
+                                            toTargetFrame(document.getElementById("id").value,"padding-right",
+                                            event.target.value + document.getElementById("padding-unit").value); event.target.form.submit()'/>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <div class="row mb-2">
+                                      <div class="col">
+                                        <div class="input-group input-group-sm ms-0">
+                                          <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 60px">Left</span>
+                                          <input type="number" name="padding-left" id="padding-left" class="form-control bg-dark text-secondary border-secondary"
+                                            defaultValue="0" min="0" onchange='
+                                            toTargetFrame(document.getElementById("id").value,"padding-left",
+                                            event.target.value + document.getElementById("padding-unit").value); event.target.form.submit()'/>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <div class="row mb-2">
+                                      <div class="col">
+                                        <div class="input-group input-group-sm ms-0">
+                                          <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 60px">Top</span>
+                                          <input type="number" name="padding-top" id="padding-top" class="form-control bg-dark text-secondary border-secondary" 
+                                            defaultValue="0" min="0" onchange='
+                                            toTargetFrame(document.getElementById("id").value,"padding-top",
+                                            event.target.value + document.getElementById("padding-unit").value); event.target.form.submit()'/>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col">
+                                        <div class="input-group input-group-sm ms-0">
+                                          <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 60px">Bottom</span>
+                                          <input type="number" name="padding-bottom" id="padding-bottom" class="form-control bg-dark text-secondary border-secondary"
+                                            defaultValue="0" min="0" onchange='
+                                            toTargetFrame(document.getElementById("id").value,"padding-bottom",
+                                            event.target.value + document.getElementById("padding-unit").value); event.target.form.submit()'/>
+                                        </div>
+                                      </div>
+                                  </div>
+                                </fieldset>
+                              </form>
+                            </div>
+                        </div>
+                        <!-- Font -->
+                        <div class="accordion-collapse collapse" id="font" data-bs-parent="#views">
+                            <div class="py-2">
+                            <!-- font style -->
+                              <form name="font-style-form"  action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="font-style" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                <div class="row mb-2">
+                                  <div class="col">
+                                    <div class="d-flex justify-content-between">
+                                    <span class="text-secondary">Style</span>
+                                    <div class="mx-auto" style="width: 150px">
+                                        <div class="d-flex justify-content-between" >
+                                        <input type="radio" name="font-style" id="font-style-normal" value="normal" class="btn-check" defaultChecked
+                                          onclick='
+                                            toTargetFrame(document.getElementById("id").value,"font-style", event.target.value); event.target.form.submit()'/>
+                                        <label for="font-style-normal" class="btn btn-sm btn-outline-secondary  py-0 px-1" style="font-size: 13px; width: 60px">Normal</label>
+                                        <input type="radio" name="font-style" id="font-style-italic" value="italic" class="btn-check"
+                                          onclick='toTargetFrame(document.getElementById("id").value,"font-style", event.target.value); event.target.form.submit()'/>
+                                        <label for="font-style-italic" class="btn btn-sm btn-outline-secondary py-0 px-1" style="font-size: 13px; width: 60px">Italic</label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- font weight -->
+                              <form name="font-weight-form"  action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="font-weight" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                <div class="row mb-2">
+                                  <div class="col">
+                                    <div class="d-flex justify-content-between">
+                                      <span class="text-secondary">Weight</span>
+                                      <div class="mx-auto" style="width: 150px">
+                                        <div class="d-flex justify-content-between" >
+                                        <input type="radio" name="font-weight" id="fw-normal" value="normal" class="btn-check" defaultChecked 
+                                          onclick='
+                                            toTargetFrame(document.getElementById("id").value,"font-weight", event.target.value); event.target.form.submit()'/>
+                                        <label for="fw-normal" class="btn btn-sm btn-outline-secondary  py-0 px-1" style="font-size: 13px; width: 60px">Normal</label>
+                                        <input type="radio" name="font-weight" id="bold" value="bold" class="btn-check" onclick='
+                                            toTargetFrame(document.getElementById("id").value,"font-weight", event.target.value); event.target.form.submit()'/>
+                                        <label for="bold" class="btn btn-sm btn-outline-secondary py-0 px-1" style="font-size: 13px; width: 60px">Bold</label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- font size -->
+                              <form name="font-size-form"  action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="font-size" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                <div class="container border border-secondary rounded mb-2 px-2 pt-1">
+                                  <span class="text-secondary">Size</span>
+                                  <div class="row mb-3 mt-2">
+                                    <div class="col">
+                                      <div class="mx-auto" style="width: 150px">
+                                        <div class="d-flex justify-content-between" >
+                                        <input type="radio" name="fs-type" id="fs-type-pre" class="btn-check" />
+                                        <label for="fs-type-pre" class="btn btn-sm btn-outline-secondary py-0 px-1" style="font-size: 13px" 
+                                          >Predefined</label>
+                                        <input type="radio" name="fs-type" id="fs-type-c" class="btn-check" defaultChecked />
+                                        <label for="fs-type-c" class="btn btn-sm btn-outline-secondary  py-0 px-1" style="font-size: 13px" 
+                                          onclick='
+                                            toTargetFrame(document.getElementById("id").value,"font-size", 
+                                            document.getElementById("font-size").value + document.getElementById("font-unit").value); event.target.form.submit()'>Custom</label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <div class="row mb-2">
+                                      <div class="input-group input-group-sm ms-0">
+                                          <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Unit</span>
+                                          <select name="font-unit" id="font-unit" class="form-select bg-dark text-secondary border-secondary" 
+                                            onchange='
+                                            toTargetFrame(document.getElementById("id").value,"font-size", 
+                                            document.getElementById("font-size").value + event.target.value); event.target.form.submit()'>
+                                            <option value="px">px</option>
+                                            <option value="em">em</option>
+                                            <option value="%">%</option>
+                                          </select>
+                                      </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                          <div class="input-group input-group-sm ms-0">
+                                            <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Size</span>
+                                            <input type="number" name="font-size" id="font-size" class="form-control bg-dark text-secondary border-secondary" min="1" defaultValue="0" 
+                                              onchange='
+                                              toTargetFrame(document.getElementById("id").value,"font-size", 
+                                              event.target.value + document.getElementById("font-unit").value); event.target.form.submit()'/>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                      <form name="font-size-pre-form"  action="/set" target="refreshFrame" method="post">
+                                        <input name="catg" value="font-size-pre" hidden/>
+                                        <input name="cssPath" class="cssPath" hidden/>
+                                        <input name="cssFile" class="cssFile" hidden/>
+                                        <input name="id" class="id" hidden/>
+                                        <input name="tagName" class="TagName" hidden/>
+                                        <div class="">
+                                          <div class="row mb-2">
+                                            <div class="input-group input-group-sm ms-0">
+                                              <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Predefined</span>
+                                              <select name="font-size-pre" id="font-size-pre" class="form-select bg-dark text-secondary border-secondary" 
+                                                onchange='
+                                                  toTargetFrame(document.getElementById("id").value,"font-size", 
+                                                  event.target.value); event.target.form.submit()'>
+                                                <option value="xx-small">xx-small</option>
+                                                <option value="x-small">x-small</option>
+                                                <option value="small">small</option>
+                                                <option value="medium">medium</option>
+                                                <option value="large">large</option>
+                                                <option value="x-large">x-large</option>
+                                                <option value="xx-large">xx-large</option>
+                                                <option value="smaller">smaller</option>
+                                                <option value="larger">larger</option>
+                                                <option value="initial">initial</option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                                </form>
+                              
+                              <!-- font family -->
+                              <form name="font-family-form"  action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="font-family" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Family</span>
+                                    <select name="font-family" id="font-family" class="form-select bg-dark text-secondary border-secondary" 
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"font-family", 
+                                        event.target.value); event.target.form.submit()'>
+                                      <option value="Verdana, sans-serif">Verdana, sans-serif</option>
+                                      <option value="Georgia, serif">Georgia, serif</option>
+                                      <option value="Garamond, serif">Garamond, serif</option>
+                                      <option value="Helvetica, sans-serif">Helvetica, sans-serif</option>
+                                      <option value="Georgia">Georgia</option>
+                                      <option value="Palatino Linotype">Palatino Linotype</option>
+                                      <option value="Book Antiqua">Book Antiqua</option>
+                                      <option value="Times New Roman">Times New Roman</option>
+                                      <option value="Arial">Arial</option>
+                                      <option value="Helvetica">Helvetica</option>
+                                      <option value="Arial Black">Arial Black</option>
+                                      <option value="Impact">Impact</option>
+                                      <option value="Lucida Sans Unicode">Lucida Sans Unicode</option>
+                                      <option value="Tahoma">Tahoma</option>
+                                      <option value="Verdana">Verdana</option>
+                                      <option value="Courier New">Courier New</option>
+                                      <option value="Lucida Console">Lucida Console</option>
+                                      <option value="Merriweather, serif">Merriweather, serif</option>
+                                      <option value="Lora, serif">Lora, serif</option>
+                                      <option value="Ubuntu, sans-serif">Ubuntu, sans-serif</option>
+                                      <option value="Poppins, sans-serif">Poppins, sans-serif</option>
+                                      <option value="'Abril Fatface', serif">`&apos;`Abril Fatface`&apos;`, serif</option>
+                                      <option value="'Fauna One', serif">`&apos;`Fauna One`&apos;`, serif</option>
+                                      <option value="Cinzel, serif">Cinzel, serif</option>
+                                      <option value="'Libre Baskerville', serif">`&apos;`Libre Baskerville`&apos;`, serif</option>
+                                      <option value="'Fjalla One', sans-serif">`&apos;`Fjalla One`&apos;`, sans-serif</option>
+                                      <option value="Muli, sans-serif">Muli, sans-serif</option>
+                                      <option value='"Space Mono", monospace'>`&quot;`Space Mono`&quot;`, monospace</option>
+                                      <option value="Rubik, sans-serif">Rubik, sans-serif</option>
+                                      <option value="Spectral, serif">Spectral, serif</option>
+                                      <option value='"Noto Sans", sans-serif'>`&quot;`Noto Sans`&quot;`, sans-serif</option>
+                                      <option value="Oswald, sans-serif">Oswald, sans-serif</option>
+                                      <option value="initial">initial</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- font color -->
+                              <form name="font-color-form"  action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="font-color" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                <div class="row mb-2">
+                                  <div class="col">
+                                    <div class="input-group input-group-sm ms-0">
+                                      <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Color</span>
+                                      <input type="color" name="color" class="form-control bg-dark text-secondary border-secondary" 
+                                        style="height: auto" onchange='
+                                          toTargetFrame(document.getElementById("id").value,"color", 
+                                          event.target.value); event.target.form.submit()'/>
+                                    </div>
+                                  </div>
+                                </div>                        
+                              </form>
+                            </div>
+                          </div>
+                          <!-- Width -->
+                          <div class="accordion-collapse collapse" id="WIDTH" data-bs-parent="#views">
+                            <div class="py-2">
+                              <form name="width-form"  action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="width" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                <div class="row mb-2 g-1">
+                                  <div class="col">
+                                    <div class="input-group input-group-sm ms-0">
+                                      <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 55px">Width</span>
+                                      <input type="number" name="width" id="width" class="form-control bg-dark text-secondary border-secondary" 
+                                        min="0" defaultValue="0" onchange='
+                                          toTargetFrame(document.getElementById("id").value,"width", 
+                                          event.target.value + document.getElementById("width-unit").value); event.target.form.submit()'/>
+                                    </div>
+                                  </div>
+                                  <div class="col">
+                                    <div class="input-group input-group-sm ms-0">
+                                      <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 40px">Unit</span>
+                                      <select name="width-unit" id="width-unit" class="form-select bg-dark text-secondary border-secondary" 
+                                        onchange='
+                                          toTargetFrame(document.getElementById("id").value,"width", 
+                                          document.getElementById("width").value + event.target.value); event.target.form.submit()'>
+                                        <option value="px">px</option>
+                                        <option value="em">em</option>
+                                        <option value="rem">rem</option>
+                                        <option value="%">%</option>
+                                        <option value="vh">vw</option>
+                                        <option value="auto">auto</option>
+                                        <option value="initial">initial</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                          <!-- Height -->
+                          <div class="accordion-collapse collapse" id="HIGHT" data-bs-parent="#views">
+                            <div class="py-2">
+                              <form name="height-form"  action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="height" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                <div class="row mb-2 g-1">
+                                  <div class="col">
+                                    <div class="input-group input-group-sm ms-0">
+                                      <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 55px">Height</span>
+                                      <input type="number" name="height" id="height" class="form-control bg-dark text-secondary border-secondary" 
+                                        min="0" defaultValue="0" onchange='
+                                          toTargetFrame(document.getElementById("id").value,"height", 
+                                          event.target.value + document.getElementById("height-unit").value); event.target.form.submit()'/>
+                                    </div>
+                                  </div>
+                                  <div class="col">
+                                    <div class="input-group input-group-sm ms-0">
+                                      <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 40px">Unit</span>
+                                      <select name="height-unit" id="height-unit" class="form-select bg-dark text-secondary border-secondary" 
+                                      onchange='
+                                          toTargetFrame(document.getElementById("id").value,"height", 
+                                          document.getElementById("height").value + event.target.value); event.target.form.submit()'>
+                                        <option value="px">px</option>
+                                        <option value="em">em</option>
+                                        <option value="rem">rem</option>
+                                        <option value="%">%</option>
+                                        <option value="vh">vh</option>
+                                        <option value="auto">auto</option>
+                                        <option value="initial">initial</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>                       
+                              </form>
+                            </div>
+                          </div>
+                          <!-- Background -->
+                          <div class="accordion-collapse collapse" id="background" data-bs-parent="#views">
+                            <div class="py-2">
+                              <!-- Background color -->
+                              <form name="background-color-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="background-color" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                <div class="row mb-2">
+                                  <div class="col">
+                                    <div class="input-group input-group-sm ms-0">
+                                      <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 87px">Color</span>
+                                      <input type="color" name="background-color" id="background-color" class="form-control bg-dark text-secondary border-secondary" 
+                                        defaultValue="#ffffff" onchange='
+                                            toTargetFrame(document.getElementById("id").value,"background-color", event.target.value); 
+                                            event.target.form.submit()' style="height: auto"/>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- Background image -->
+                              <form name="bg-image-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="background-image" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                <div class="row mb-2">
+                                  <div class="col">
+                                    <div class="input-group input-group-sm ms-0">
+                                      <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 87px">Image</span>
+                                      <input type="text" name="background-image" class="form-control bg-dark text-secondary border-secondary" 
+                                        placeholder="URL, reative or full path" defaultValue="''" onblur='
+                                            toTargetFrame(document.getElementById("id").value,"background-image", `url("${event.target.value}")`); 
+                                            event.target.form.submit()' style="height: auto"/>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- Background position -->
+                              <form name="background-position-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="background-position" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 87px">Position</span>
+                                    <select name="background-position" id="background-position" class="form-select bg-dark text-secondary border-secondary" 
+                                      defaultValue="initial" onchange='
+                                            toTargetFrame(document.getElementById("id").value,"background-position", event.target.value); 
+                                            event.target.form.submit()'>
+                                      <option value="left top">left top</option>
+                                      <option value="left center">left center</option>
+                                      <option value="left bottom">left bottom</option>
+                                      <option value="right top">right top</option>
+                                      <option value="right center">right center</option>
+                                      <option value="right bottom">right bottom</option>
+                                      <option value="center top">center top</option>
+                                      <option value="center center">center center</option>
+                                      <option value="center bottom">center bottom</option>
+                                      <option value="initial">initial</option>
+                                      <option value="inherit">inherit</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- Background attachment -->
+                              <form name="background-attachment-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="background-attachment" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 87px">Attachment</span>
+                                    <select name="background-attachment" id="background-attachment" class="form-select bg-dark text-secondary border-secondary" 
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"background-attachment", event.target.value); 
+                                        event.target.form.submit()'>
+                                      <option value="scroll">scroll</option>
+                                      <option value="fixed">fixed</option>
+                                      <option value="local">local</option>
+                                      <option value="initial">initial</option>
+                                      <option value="inherit">inherit</option>
+                                    </select>
+                                  </div>
+                                </div> 
+                              </form>
+                              <!-- Background clip -->
+                              <form name="background-clip-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="background-clip" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 87px">Clip</span>
+                                    <select name="background-clip" id="background-clip" class="form-select bg-dark text-secondary border-secondary" 
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"background-clip", event.target.value); 
+                                        event.target.form.submit()'>
+                                      <option value="border-box">border-box</option>
+                                      <option value="padding-box">padding-box</option>
+                                      <option value="content-box">content-box</option>
+                                      <option value="initial">initial</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- Background repeat -->
+                              <form name="background-repeat-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="background-repeat" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 87px">Repeat</span>
+                                    <select name="background-repeat" id="background-repeat" class="form-select bg-dark text-secondary border-secondary" 
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"background-repeat", event.target.value); 
+                                        event.target.form.submit()'>
+                                      <option value="repeat">repeat</option>
+                                      <option value="repeat-x">repeat-x</option>
+                                      <option value="repeat-y">repeat-y</option>
+                                      <option value="no-repeat">no-repeat</option>
+                                      <option value="space">space</option>
+                                      <option value="round">round</option>
+                                      <option value="initial">initial</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- Background origin -->
+                              <form name="background-origin-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="background-origin" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 87px">Origin</span>
+                                    <select name="background-origin" id="background-origin" class="form-select bg-dark text-secondary border-secondary" 
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"background-origin", event.target.value); 
+                                        event.target.form.submit()'>
+                                      <option value="padding-box">padding-box</option>
+                                      <option value="border-box">border-box</option>
+                                      <option value="content-box">content-box</option>
+                                      <option value="no-repeat">no-repeat</option>
+                                      <option value="initial">initial</option>
+                                      <option value="inherit">inherit</option>
+                                    </select>
+                                  </div>
+                                </div> 
+                              </form>
+                              <!-- Background size -->
+                              <div class="row my-2 d-flex justify-content-around text-secondary">
+                                  Size
+                                  <input type="radio" name="background-size-type-c" id="background-size-type-c" class="btn-check" />
+                                  <label for="background-size-type-c" class="btn btn-sm btn-outline-secondary  py-0 px-1" style="font-size: 13px; width: 90px">Custom</label>
+                                  <input type="radio" name="background-size-type-pre" id="background-size-type-pre" class="btn-check" defaultChecked />
+                                  <label for="background-size-type-pre" class="btn btn-sm btn-outline-secondary py-0 px-1" style="font-size: 13px; width: 90px">Predefined</label>
+                              </div>
+                              
+                                <form name="background-size-pre-form" action="/set" target="refreshFrame" method="post">
+                                  <fieldset id="background-size-pre-field">
+                                    <input name="catg" value="background-size-pre" hidden/>
+                                    <input name="cssPath" class="cssPath" hidden/>
+                                    <input name="cssFile" class="cssFile" hidden/>
+                                    <input name="id" class="id" hidden/>
+                                    <input name="tagName" class="TagName" hidden/>
+                                    <div class="row mb-3 g-1" id="paddings-row">
+                                      <div class="col">
+                                        <div class="input-group input-group-sm ms-0">
+                                          <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 40px">Size</span>
+                                          <select name="background-size" id="background-size" class="form-select bg-dark text-secondary border-secondary"
+                                            onchange='
+                                              toTargetFrame(document.getElementById("id").value,"background-size", 
+                                              event.target.value); event.target.form.submit()'>
+                                            <option value="auto">auto</option>
+                                            <option value="cover">cover</option>
+                                            <option value="contain">contain</option>
+                                            <option value="initial">initial</option>
+                                            <option value="inherit">inherit</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </fieldset>
+                                </form>
+                                
+                                <form name="background-size-c-form" action="/set" target="refreshFrame" method="post">
+                                  <fieldset id="background-size-c-field">
+                                    <input name="catg" value="background-size-c" hidden/>
+                                    <input name="cssPath" class="cssPath" hidden/>
+                                    <input name="cssFile" class="cssFile" hidden/>
+                                    <input name="id" class="id" hidden/>
+                                    <input name="tagName" class="TagName" hidden/>
+                                    <div class="row mb-2">
+                                      <div class="input-group input-group-sm ms-0">
+                                          <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 60px">Unit</span>
+                                          <select name="background-size-c-unit" id="background-size-c-unit" class="form-select bg-dark text-secondary border-secondary" 
+                                            onchange='
+                                              toTargetFrame(document.getElementById("id").value,"background-size", 
+                                              document.getElementById("background-size-c").value + event.target.value); event.target.form.submit()'>
+                                            <option value="px">px</option>
+                                            <option value="em">em</option>
+                                            <option value="%">%</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                          <div class="input-group input-group-sm ms-0">
+                                            <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 60px">Size</span>
+                                            <input type="number" name="background-size-c" id="background-size-c" class="form-control bg-dark text-secondary border-secondary"
+                                              defaultValue="0" min="0" onchange='
+                                              toTargetFrame(document.getElementById("id").value,"background-size", 
+                                              event.target.value + document.getElementById("background-size-c-unit").value ); event.target.form.submit()'/>
+                                          </div>
+                                        </div>
+                                    </div>
+                                  </fieldset>
+                                </form>
+                              </div>
+                            </div>
+                        <!-- Borders -->
+                        <div class="accordion-collapse collapse" id="borders" data-bs-parent="#views">
+                            <div class="py-2">
+                            <form name="borders-form" action="/set" target="refreshFrame" method="post">
+                              <input name="catg" id="border-catg" value="borders" hidden/>
+                              <input name="cssPath" class="cssPath" hidden/>
+                              <input name="cssFile" class="cssFile" hidden/>
+                              <input name="id" class="id" hidden/>
+                              <input name="tagName" class="TagName" hidden/>
+                                  <div class="row mb-3 mt-2">
+                                    <div>
+                                      <!-- Border width -->
+                                        <form name="border-all-form" action="/set" target="refreshFrame" method="post">
+                                          <fieldset id="border-all-field">
+                                            <input name="catg" value="border-all" hidden/>
+                                            <input name="cssPath" class="cssPath" hidden/>
+                                            <input name="cssFile" class="cssFile" hidden/>
+                                            <input name="id" class="id" hidden/>
+                                            <input name="tagName" class="TagName" hidden/>
+                                            <div class="row mb-3 g-1" id="borders-row">
+                                              <div class="col">
+                                                <div class="input-group input-group-sm ms-0">
+                                                  <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 64px">Width</span>
+                                                  <input type="number" name="border" id="border" class="form-control bg-dark text-secondary border-secondary" 
+                                                    min="1" defaultValue="0" onchange='setAllBorder()'/>
+                                                </div>
+                                              </div>
+                                              <div class="col">
+                                                <div class="input-group input-group-sm ms-0">
+                                                  <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 40px">Unit</span>
+                                                  <select name="borders-unit" id="borders-unit" class="form-select bg-dark text-secondary border-secondary"
+                                                    onchange='
+                                                      toTargetFrame(document.getElementById("id").value,"border", 
+                                                      document.getElementById("border").value + event.target.value); event.target.form.submit()'>
+                                                    <option value="px">px</option>
+                                                    <option value="em">em</option>
+                                                    <option value="rem">rem</option>
+                                                    <option value="%">%</option>
+                                                    <option value="vh">vw</option>
+                                                    <option value="auto">auto</option>
+                                                    <option value="initial">initial</option>
+                                                  </select>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </fieldset>
+                                        </form>
+                                      <!-- Border color -->
+                                      <form name="border-color-form" action="/set" target="refreshFrame" method="post">
+                                        <input name="catg" value="border-color" hidden/>
+                                        <input name="cssPath" class="cssPath" hidden/>
+                                        <input name="cssFile" class="cssFile" hidden/>
+                                        <input name="id" class="id" hidden/>
+                                        <input name="tagName" class="TagName" hidden/> 
+                                        <div class="row mb-2">
+                                          <div class="input-group input-group-sm ms-0">
+                                            <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 87px">Color</span>
+                                            <input type="color" id="border-color" name="border-color" class="form-control bg-dark text-secondary border-secondary" style="height: auto"
+                                              onchange='setAllBorder()'/>
+                                          </div>
+                                        </div>
+                                      </form>
+                                      <!-- Border style -->
+                                      <form name="border-style-form" action="/set" target="refreshFrame" method="post">
+                                        <input name="catg" value="border-style" hidden/>
+                                        <input name="cssPath" class="cssPath" hidden/>
+                                        <input name="cssFile" class="cssFile" hidden/>
+                                        <input name="id" class="id" hidden/>
+                                        <input name="tagName" class="TagName" hidden/> 
+                                        <div class="row mb-2">
+                                          <div class="input-group input-group-sm ms-0">
+                                              <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Style</span>
+                                              <select name="border-style" id="border-style" class="form-select bg-dark text-secondary border-secondary"
+                                                onchange='setAllBorder()'>
+                                                <option value="solid">solid</option>
+                                                <option value="dotted">dotted</option>
+                                                <option value="dashed">dashed</option>
+                                                <option value="double">double</option>
+                                                <option value="none">none</option>
+                                                <option value="hidden">hidden</option>
+                                                <option value="groove">groove</option>
+                                                <option value="ridge">ridge</option>
+                                                <option value="inset">inset</option>
+                                                <option value="outset">outset</option>
+                                                <option value="initial">initial</option>
+                                                <option value="inherit">inherit</option>
+                                              </select>
+                                          </div>
+                                        </div>
+                                      </form>
+                                      <!-- Border radius -->
+                                      <form name="border-radius-form" action="/set" target="refreshFrame" method="post">
+                                        <input name="catg" value="border-radius" hidden/>
+                                        <input name="cssPath" class="cssPath" hidden/>
+                                        <input name="cssFile" class="cssFile" hidden/>
+                                        <input name="id" class="id" hidden/>
+                                        <input name="tagName" class="TagName" hidden/> 
+                                        <div class="row mb-2 g-1">
+                                          <div class="col">
+                                            <div class="input-group input-group-sm ms-0">
+                                              <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 55px">Radius</span>
+                                              <input type="number" name="border-radius" class="form-control bg-dark text-secondary border-secondary" min="1"/>
+                                            </div>
+                                          </div>
+                                          <div class="col">
+                                            <div class="input-group input-group-sm ms-0">
+                                              <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 40px">Unit</span>
+                                              <select name="border-raduis-unit" class="form-select bg-dark text-secondary border-secondary">
+                                                <option value="px">px</option>
+                                                <option value="%">%</option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </form>
+                                      <!-- Border spacing x -->
+                                      <form name="border-spacing-form" action="/set" target="refreshFrame" method="post">
+                                        <input name="catg" value="border-spacing" hidden/>
+                                        <input name="cssPath" class="cssPath" hidden/>
+                                        <input name="cssFile" class="cssFile" hidden/>
+                                        <input name="id" class="id" hidden/>
+                                        <input name="tagName" class="TagName" hidden/> 
+                                        <div class="row mb-2 g-1">
+                                          <div class="col">
+                                            <div class="input-group input-group-sm ms-0">
+                                              <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Space-x (px)</span>
+                                              <input type="number" name="border-spacing-x" class="form-control bg-dark text-secondary border-secondary" min="0" defaultValue="0"/>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="row mb-2 g-1">
+                                          <div class="col">
+                                            <div class="input-group input-group-sm ms-0">
+                                              <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Space-y (px)</span>
+                                              <input type="number" name="border-spacing-y" class="form-control bg-dark text-secondary border-secondary" min="0" defaultValue="0"/>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </form>
+                                      <!-- Border collapse -->
+                                      <form name="border-collapse-form" action="/set" target="refreshFrame" method="post">
+                                        <input name="catg" value="border-collapse" hidden/>
+                                        <input name="cssPath" class="cssPath" hidden/>
+                                        <input name="cssFile" class="cssFile" hidden/>
+                                        <input name="id" class="id" hidden/>
+                                        <input name="tagName" class="TagName" hidden/> 
+                                        <div class="row mb-2">
+                                          <div class="input-group input-group-sm ms-0">
+                                            <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Collapse</span>
+                                            <select name="border-collapse" id="border-collapse" class="form-select bg-dark text-secondary border-secondary">
+                                              <option value="separate">separate</option>
+                                              <option value="collapse">collapse</option>
+                                              <option value="initial">initial</option>
+                                              <option value="inherit">inherit</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                      </form>
+                                    </div>
+                                  </div>          
+                            </form>
+                            </div>
+                          </div>
+                          <!-- Outline -->
+                          <div class="accordion-collapse collapse" id="outline" data-bs-parent="#views">
+                            <div class="py-2">
+                              <!-- Outline width -->
+                              <div class="row mb-3 mt-2">
+                                <div class="col">
+                                  <div class="mx-auto" >
+                                    <div class="d-flex justify-content-around text-secondary" >
+                                    Width
+                                    <input type="radio" name="outline-width-type" id="outline-width-type-pre" class="btn-check" defaultChecked/>
+                                    <label for="outline-width-type-pre" class="btn btn-sm btn-outline-secondary py-0 px-1" style="font-size: 13px">Predefined</label>
+                                    <input type="radio" name="outline-width-type" id="outline-width-type-c" class="btn-check" />
+                                    <label for="outline-width-type-c" class="btn btn-sm btn-outline-secondary py-0 px-1" style="font-size: 13px">Custom</label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <form name="outline-width-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="outline-width-pre" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                  <fieldset id="outline-width-pre-field">
+                                    <div class="row mb-2">
+                                        <div class="input-group input-group-sm ms-0">
+                                            <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Width</span>
+                                            <select name="outline-width-pre" id="outline-width-pre" class="form-select bg-dark text-secondary border-secondary" 
+                                              onchange='
+                                                toTargetFrame(document.getElementById("id").value,"outline-width", event.target.value); event.target.form.submit()'>
+                                              <option value="medium">medium</option>
+                                              <option value="thin">thin</option>
+                                              <option value="thick">thick</option>
+                                              <option value="initial">initial</option>
+                                              <option value="inherit">inherit</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                  </fieldset>
+                              </form>
+                              <form name="outline-width-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="outline-width-c" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                  <fieldset id="outline-width-c-field">
+                                    <div class="row mb-2">
+                                        <div class="col">
+                                          <div class="input-group input-group-sm ms-0">
+                                            <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Width (px)</span>
+                                            <input type="number" name="outline-width" id="outline-width" class="form-control bg-dark text-secondary border-secondary" 
+                                              min="0" defaultValue="0" onchange='
+                                                toTargetFrame(document.getElementById("id").value,"outline-width", 
+                                                event.target.value + "px"); event.target.form.submit()'/>
+                                          </div>
+                                        </div>
+                                    </div>
+                                  </fieldset>
+                              </form>
+                              <!-- outline color -->
+                              <form name="outline-color-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="outline-color" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                <div class="row mb-2">
+                                  <div class="col">
+                                    <div class="input-group input-group-sm ms-0">
+                                      <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Color</span>
+                                      <input type="color" name="outline-color" id="outline-color" class="form-control bg-dark text-secondary border-secondary" 
+                                        style="height: auto" onchange='
+                                        toTargetFrame(document.getElementById("id").value,"outline-color", 
+                                        event.target.value); event.target.form.submit()'/>
+                                    </div>
+                                  </div>
+                                </div> 
+                              </form>
+                              <!-- outline style -->
+                              <form name="outline-style-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="outline-style" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Style</span>
+                                    <select name="outline-style" id="outline-style" class="form-select bg-dark text-secondary border-secondary"
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"outline-style", 
+                                        event.target.value); event.target.form.submit()'>
+                                      <option value="none">none</option>
+                                      <option value="hidden">hidden</option>
+                                      <option value="dotted">dotted</option>
+                                      <option value="dashed">dashed</option>
+                                      <option value="solid">solid</option>
+                                      <option value="double">double</option>
+                                      <option value="groove">groove</option>
+                                      <option value="ridge">ridge</option>
+                                      <option value="inset">inset</option>
+                                      <option value="outset">outset</option>
+                                      <option value="initial">initial</option>
+                                      <option value="inherit">inherit</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- outline offset -->
+                              <form name="outline-offset-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="outline-offset" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/>
+                                <div class="row mb-2">
+                                  <div class="col">
+                                    <div class="input-group input-group-sm ms-0">
+                                      <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Offset (px)</span>
+                                      <input type="number" name="outline-offset" id="outline-offset" class="form-control bg-dark text-secondary border-secondary" 
+                                        min="0" defaultValue="0" onchange='
+                                          toTargetFrame(document.getElementById("id").value,"outline-offset", 
+                                        event.target.value + "px"); (event.target.form.submit())'/>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                        </div>
+                        <!-- Text -->
+                        <div class="accordion-collapse collapse" id="text" data-bs-parent="#views">
+                            <div class="py-2">
+                              <!-- text align x -->
+                              <form name="text-align-x-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="text-align" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Align-x</span>
+                                    <select name="text-align" id="text-align" class="form-select bg-dark text-secondary border-secondary"
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"text-align", 
+                                        event.target.value); event.target.form.submit()'>
+                                      <option value="initial">initial</option>
+                                      <option value="left">left</option>
+                                      <option value="right">right</option>
+                                      <option value="center">center</option>
+                                      <option value="justify">justify</option>
+                                      <option value="inherit">inherit</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- text align y -->
+                              <form name="text-align-y-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="vertical-align" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Align-y</span>
+                                    <select name="vertical-align" id="vertical-align" class="form-select bg-dark text-secondary border-secondary"
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"vertical-align", 
+                                        event.target.value); event.target.form.submit()'>
+                                      <option value="baseline">baseline</option>
+                                      <option value="sub">sub</option>
+                                      <option value="super">super</option>
+                                      <option value="top">top</option>
+                                      <option value="text-top">text-top</option>
+                                      <option value="middle">middle</option>
+                                      <option value="bottom">bottom</option>
+                                      <option value="text-bottom">text-bottom</option>
+                                      <option value="initial">initial</option>
+                                      <option value="inherit">inherit</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- text align last -->
+                              <form name="text-align-last-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="text-align-last" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Align-last</span>
+                                    <select name="text-align-last" id="text-align-last" class="form-select bg-dark text-secondary border-secondary"
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"text-align-last", 
+                                        event.target.value); event.target.form.submit()'>
+                                      <option value="auto">auto</option>
+                                      <option value="left">left</option>
+                                      <option value="right">right</option>
+                                      <option value="center">center</option>
+                                      <option value="justify">justify</option>
+                                      <option value="start">start</option>
+                                      <option value="end">end</option>
+                                      <option value="initial">initial</option>
+                                      <option value="inherit">inherit</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- text decoration line -->
+                              <form name="text-decoration-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="text-decoration" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Decoration</span>
+                                    <select name="text-decoration" id="text-decoration" class="form-select bg-dark text-secondary border-secondary"
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"text-decoration", 
+                                        event.target.value); event.target.form.submit()'>
+                                      <option value="none">none</option>
+                                      <option value="underline">underline</option>
+                                      <option value="overline">overline</option>
+                                      <option value="line-through">line-through</option>
+                                      <option value="initial">initial</option>
+                                      <option value="inherit">inherit</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- text decoration color -->
+                              <form name="text-decoration-color-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="text-decoration-color" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <div class="row mb-2">
+                                  <div class="col">
+                                    <div class="input-group input-group-sm ms-0">
+                                      <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Decor. color</span>
+                                      <input type="color" name="text-decoration-color" id="text-decoration-color" class="form-control bg-dark text-secondary border-secondary" 
+                                        style="height: auto" onchange='
+                                        toTargetFrame(document.getElementById("id").value,"text-decoration-color", 
+                                        event.target.value); event.target.form.submit()'/>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- text decoration style -->
+                              <form name="text-decoration-style-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="text-decoration-style" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Decor. style</span>
+                                    <select name="text-decoration-style" id="text-decor-style" class="form-select bg-dark text-secondary border-secondary"
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"text-decoration-style", 
+                                        event.target.value); event.target.form.submit()'>
+                                      <option value="solid">solid</option>
+                                      <option value="double">double</option>
+                                      <option value="dotted">dotted</option>
+                                      <option value="dashed">dashed</option>
+                                      <option value="wavy">wavy</option>
+                                      <option value="initial">initial</option>
+                                      <option value="inherit">inherit</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- text indent -->
+                              <form name="text-indent-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="text-indent" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <div class="row mb-2">
+                                  <div class="col">
+                                    <div class="input-group input-group-sm ms-0">
+                                      <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Indent (px)</span>
+                                      <input type="number" name="text-indent" id="text-indent" class="form-control bg-dark text-secondary border-secondary" 
+                                        min="0" defaultValue="0" onchange='
+                                        toTargetFrame(document.getElementById("id").value,"text-indent", 
+                                        event.target.value + "px"); event.target.form.submit()'/>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- text overflow -->
+                              <form name="text-overflow-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="text-overflow" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Overflow</span>
+                                    <select name="text-overflow" id="text-overflow" class="form-select bg-dark text-secondary border-secondary"
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"text-overflow", 
+                                        event.target.value); event.target.form.submit()'>
+                                      <option value="clip">clip</option>
+                                      <option value="ellipsis">ellipsis</option>
+                                      <option value="string">string</option>
+                                      <option value="initial">initial</option>
+                                      <option value="inherit">inherit</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                              <!-- text transform -->
+                              <form name="text-transform-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="text-transform" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Transform</span>
+                                    <select name="text-transform" id="text-transform" class="form-select bg-dark text-secondary border-secondary"
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"text-transform", 
+                                        event.target.value); event.target.form.submit()'>
+                                      <option value="none">none</option>
+                                      <option value="capitalize">capitalize</option>
+                                      <option value="uppercase">uppercase</option>
+                                      <option value="lowercase">lowercase</option>
+                                      <option value="initial">initial</option>
+                                      <option value="inherit">inherit</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                        </div>
+                        <!-- Display -->
+                        <div class="accordion-collapse collapse" id="display" data-bs-parent="#views">
+                            <div class="py-2">
+                              <form name="display-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="display" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <!-- display behavior -->
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Behavior</span>
+                                    <select name="display" id="display-behave" class="form-select bg-dark text-secondary border-secondary"
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"display", 
+                                        event.target.value); event.target.form.submit()'>
+                                      <option value="initial">initial</option>
+                                      <option value="inline">inline</option>
+                                      <option value="block">block</option>
+                                      <option value="inline-block">inline-block</option>
+                                      <option value="flex">flex</option>
+                                      <option value="none">none</option>
+                                      <option value="grid">grid</option>
+                                      <option value="contents">contents</option>
+                                      <option value="inline-flex">inline-flex</option>
+                                      <option value="inline-grid">inline-grid</option>
+                                      <option value="inline-table">inline-table</option>
+                                      <option value="list-item">list-item</option>
+                                      <option value="run-in">run-in</option>
+                                      <option value="table">table</option>
+                                      <option value="table-caption">table-caption</option>
+                                      <option value="table-column-group">table-column-group</option>
+                                      <option value="table-header-group">table-header-group</option>
+                                      <option value="table-footer-group">table-footer-group</option>
+                                      <option value="table-row-group">table-row-group</option>
+                                      <option value="table-cell">table-cell</option>
+                                      <option value="table-column">table-column</option>
+                                      <option value="table-row">table-row</option>
+                                      <option value="inherit">inherit</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                        </div>
+                        <!-- Position -->
+                        <div class="accordion-collapse collapse" id="position" data-bs-parent="#views">
+                            <div class="py-2">
+                              <form name="position-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="position" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <!-- position type -->
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Type</span>
+                                    <select name="position" id="position-type" class="form-select bg-dark text-secondary border-secondary"
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"position", 
+                                        event.target.value); event.target.form.submit()'>
+                                      <option value="''"></option>
+                                      <option value="static">static</option>
+                                      <option value="absolute">absolute</option>
+                                      <option value="fixed">fixed</option>
+                                      <option value="relative">relative</option>
+                                      <option value="sticky">sticky</option>
+                                      <option value="initial">initial</option>
+                                      <option value="inherit">inherit</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                        </div>
+                        <!-- z-index -->
+                        <div class="accordion-collapse collapse" id="z-index" data-bs-parent="#views">
+                            <div class="py-2">
+                              <form name="zindex-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="z-index" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <!-- stack order -->
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Stack order</span>
+                                    <input type="number" name="z-index" id="z-index-order" class="form-control bg-dark text-secondary border-secondary" 
+                                        min="0" defaultValue="0" onchange='
+                                        toTargetFrame(document.getElementById("id").value,"z-index", 
+                                        event.target.value); event.target.form.submit()'/>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                        </div>
+                        <!-- Overflow -->
+                        <div class="accordion-collapse collapse" id="overflow" data-bs-parent="#views">
+                            <div class="py-2">
+                              <form name="overflow-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="overflow" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <!-- overflow type -->
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Overflow</span>
+                                    <select name="overflow" id="overflow-type" class="form-select bg-dark text-secondary border-secondary"
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"overflow", 
+                                        event.target.value); event.target.form.submit()'>
+                                      <option value="visible">visible</option>
+                                      <option value="hidden">hidden</option>
+                                      <option value="scroll">scroll</option>
+                                      <option value="auto">auto</option>
+                                      <option value="initial">initial</option>
+                                      <option value="inherit">inherit</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                        </div>
+                        <!-- Float -->
+                        <div class="accordion-collapse collapse" id="float" data-bs-parent="#views">
+                            <div class="py-2">
+                              <form name="float-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="float" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <!-- float type -->
+                                <div class="row mb-2">
+                                  <div class="input-group input-group-sm ms-0">
+                                    <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Float</span>
+                                    <select name="float" id="float-type" class="form-select bg-dark text-secondary border-secondary"
+                                      onchange='
+                                        toTargetFrame(document.getElementById("id").value,"float", 
+                                        event.target.value); event.target.form.submit()' >
+                                      <option value="none">none</option>
+                                      <option value="left">left</option>
+                                      <option value="right">right</option>
+                                      <option value="initial">initial</option>
+                                      <option value="inherit">inherit</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                        </div>
+                        <!-- Opacity -->
+                        <div class="accordion-collapse collapse" id="opacity" data-bs-parent="#views">
+                            <div class="py-2">
+                              <form name="opacity-form" action="/set" target="refreshFrame" method="post">
+                                <input name="catg" value="opacity" hidden/>
+                                <input name="cssPath" class="cssPath" hidden/>
+                                <input name="cssFile" class="cssFile" hidden/>
+                                <input name="id" class="id" hidden/>
+                                <input name="tagName" class="TagName" hidden/> 
+                                <!-- opacity level -->
+                                <div class="row mb-2">
+                                  <div class="col">
+                                    <div class="input-group input-group-sm ms-0">
+                                      <span class="input-group-text bg-dark text-secondary border-secondary" style="width: 90px">Level</span>
+                                      <input type="number" name="opacity" id="opacity-level" class="form-control bg-dark text-secondary border-secondary" 
+                                        min="0" max="1" step="0.1" defaultValue="1" onchange='toTargetFrame(document.getElementById("id").value,
+                                          "opacity",event.target.value); event.target.form.submit()' 
+                                        
+                                        onkeydown='if(event.key == "Enter"){toTargetFrame(document.getElementById("id").value,"opacity", 
+                                        event.target.value); event.target.form.submit()}'/>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                        </div>
+                          
+                    </div>
+                    <form method="post" action="/finish">
+                      <button type="submit" class="btn btn-sm fw-bold w-100 my-3" style="background-color: #00cc99">Finish</button>
+                    </form>
+                    <form method="post" action="/discard">
+                      <button type="submit" class="btn btn-sm fw-bold w-100 my-3" style="min-width: 70px; background-color: #b30000">Discard</button>
+                    </form>
+                    <div class="text-light text-center mb-0 mt-2 pb-0">v 0.1.0</div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <script src="/static/javascript/styler_extended.js"></script>
+        <script src="/static/javascript/bootstrap.bundle.js"></script>
+    </body>
+</html>
