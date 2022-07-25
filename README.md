@@ -27,10 +27,9 @@
 <h3>Installing</h3>
 <ol>
   <li>Clone repository</li><br>
-  <li><code>npm install</code></li><br>
-  <li><code>npm run build</code></li><br>
+  <li><code>pip install flask</code></li><br>
 </ol>
-To run the tool type <code>npm start</code> and go to <code>localhost:6500</code>.
+To run the tool type <code>flask run -p 6500</code> and go to <code>localhost:6500</code>.
 <br>
 
 <h3>How to use it</h3>
