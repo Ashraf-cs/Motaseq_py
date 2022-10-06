@@ -6,7 +6,7 @@ window.addEventListener("message", (event) => {
                 let set_id;
                 set_id = (event.data[5]) ? event.data[5] : `id${Math.random().toString().slice(2,8)}`
                 document.getElementById("id").value = set_id
-                fetch('/setID', {method: "POST", headers: {"Accept": "appliceation/x-www-form-urlencoded", 
+                fetch('/api/ids/setID', {method: "POST", headers: {"Accept": "appliceation/x-www-form-urlencoded", 
                 "content-type": "application/x-www-form-urlencoded"}, 
                 body: `htmlPath=${localStorage.getItem("htmlPath")}&element=${event.data[3]}&id=${set_id}`})
                 let ClassName = document.getElementsByClassName("id");
@@ -175,7 +175,7 @@ function setAllBorder(){
     toTargetFrame(document.getElementById("id").value,"border", document.getElementById("border").value + document.getElementById("borders-unit").value)
     toTargetFrame(document.getElementById("id").value,"border-style", document.getElementById("border-style").value);
     toTargetFrame(document.getElementById("id").value,"border-color", document.getElementById("border-color").value);
-    fetch('/set', {method: "POST", headers: {'Accept': 'application/x-www-form-urlencoded',
+    fetch('/api/set', {method: "POST", headers: {'Accept': 'application/x-www-form-urlencoded',
     'Content-Type': 'application/x-www-form-urlencoded'}, body: `catg=border-all&id=${document.getElementById("id").value}&` +
     `cssFile=${localStorage.getItem("cssFile")}&cssPath=${localStorage.getItem("cssPath")}&border=${document.getElementById("border").value}&` +
     `border-style=${document.getElementById("border-style").value}&borders-unit=${document.getElementById("borders-unit").value}&border-color=${document.getElementById("border-color").value}`})
@@ -184,7 +184,7 @@ function setAllBorder(){
 
 function setClass(name){
     name = name.replace(".", "")
-    fetch('/setClass', {method: "POST", headers: {'Accept': 'application/x-www-form-urlencoded',
+    fetch('/api/classes/setClass', {method: "POST", headers: {'Accept': 'application/x-www-form-urlencoded',
     'Content-Type': 'application/x-www-form-urlencoded'},
      body: `htmlPath=${localStorage.getItem('htmlPath')}&id=${document.getElementById("id").value}&class=${name}&element=${localStorage.getItem("element")}`})
   }
@@ -211,14 +211,17 @@ function updateOuter(id){
 
 
 function getClasses(){
-    fetch('/getClasses', {method: "POST", headers: {'Accept': 'application/x-www-form-urlencoded',
+    fetch('/api/classes/getClasses', {method: "POST", headers: {'Accept': 'application/x-www-form-urlencoded',
       'Content-Type': 'application/x-www-form-urlencoded'}, body: `cssFile=${localStorage.getItem('cssFile')}`})
     .then(res => res.json())
     .then(data => {
+        
         let classes = ""
-        data.map((class_name, index) => {
-            classes += `<span key=${index} className="badge bg-light text-dark me-1" 
-                onclick="setClass(event.target); updateOuter(event.target)">${class_name}</span>` 
+        data.classes.map((class_name, index) => {
+            if(class_name != ""){
+                classes += `<span class="badge bg-light text-dark me-1" 
+                onclick="setClass(event.target.textContent); updateOuter(event.target)">${class_name}</span>` 
+            }
         })
         
         document.getElementById("classes").innerHTML = classes

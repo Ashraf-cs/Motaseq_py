@@ -16,7 +16,7 @@ function loader(){
 
 
 function getPaths(){
-    fetch('/check')
+    fetch('/api/check')
     .then(res => res.json())
     .then(paths => {
         localStorage.setItem("htmlPath", paths.htmlPath);

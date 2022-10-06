@@ -34,10 +34,10 @@
                                 <h5>What do you want to do?</h5>
                                 <div class="mt-3 d-flex justify-content-center">
                                 <a href="/styler" class="btn btn-sm mx-2 fw-bold" style="background-color: #00cc99">Continue</a>
-                                <form method="post" action="/finish">
+                                <form method="post" action="/api/finish">
                                     <button type="submit" class="btn btn-sm text-light fw-bold mx-2" style="background-color: #404040">Finish</button>
                                 </form>
-                                <form method="post" action="/discard">
+                                <form method="post" action="/api/discard">
                                     <button type="submit" class="btn btn-sm btn-danger fw-bold mx-2">Discard</button>
                                 </form>
                                 </div>
@@ -46,7 +46,7 @@
                         </div>
                     {% else %}
                         <div class="container mt-3 pt-3">
-                            <form id="init" method="post" action="/init" onsubmit="setParams()">
+                            <form id="init" method="post" action="/api/init" onsubmit="setParams()">
                             <div class="d-flex justify-content-center">
                                 <div class="form-check form-check-inline">
                                 <input type="radio" name="type" value="html" class="form-check-input" required/>
